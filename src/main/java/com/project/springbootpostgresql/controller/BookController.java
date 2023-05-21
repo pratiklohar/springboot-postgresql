@@ -1,7 +1,8 @@
 package com.project.springbootpostgresql.controller;
 
-import com.project.springbootpostgresql.model.Book;
+import com.project.springbootpostgresql.dto.BookDTO;
 import com.project.springbootpostgresql.service.BookService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,29 +15,30 @@ public class BookController {
     BookService bookService;
 
     @PostMapping("/book")
-    public Book addBook(@RequestBody Book book){
+    public BookDTO addBook(@Valid @RequestBody BookDTO book){
         return bookService.addBook(book);
     }
 
     @GetMapping("/books")
-    public List<Book> allBooks() {
+    public List<BookDTO> allBooks() {
         return bookService.allBooks();
     }
 
     @GetMapping("/book/{id}")
-    public Book searchBook(@PathVariable String id){
+    public BookDTO searchBook(@PathVariable String id){
         return bookService.searchBook(id);
     }
 
     @GetMapping("/book")
-    public List<Book> searchBookByCategory(@RequestParam String category){
+    public List<BookDTO> searchBookByCategory(@RequestParam String category){
         return bookService.searchBookByCategory(category);
     }
 
     @PatchMapping("/book")
-    public String updateBook(@RequestBody Book book){
+    public String updateBook(@RequestBody BookDTO book){
         return bookService.updateBook(book);
     }
+
     @DeleteMapping("/book/{id}")
     public String deleteBook(@PathVariable String id){
         return bookService.deleteBook(id);

@@ -8,11 +8,12 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 
 @Repository
 public interface BookRepo extends JpaRepository<Book, String> {
-    List<Book> findByCategory(String category);
+    Optional<Book> findByCategory(String category);
 
     @Transactional
     @Modifying

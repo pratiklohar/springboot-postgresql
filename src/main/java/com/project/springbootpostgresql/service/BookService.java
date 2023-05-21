@@ -1,45 +1,22 @@
 package com.project.springbootpostgresql.service;
 
-import com.project.springbootpostgresql.model.Book;
-import com.project.springbootpostgresql.repository.BookRepo;
-import org.springframework.beans.factory.annotation.Autowired;
-
-import org.springframework.stereotype.Service;
+import com.project.springbootpostgresql.dto.BookDTO;
 
 import java.util.List;
 
+public interface BookService {
 
-@Service
-public class BookService {
+    BookDTO addBook(BookDTO book);  //create
 
-    @Autowired
-    BookRepo bookRepo;
+    List<BookDTO> allBooks();   //read
+
+    BookDTO searchBook(String id);  //read
+
+    List<BookDTO> searchBookByCategory(String category);  //read
+
+    String updateBook(BookDTO book);    //update
+
+    String deleteBook(String id); //delete
 
 
-    public List<Book> allBooks() {
-        return bookRepo.findAll();
-    }
-
-    public Book searchBook(String id) {
-        return bookRepo.findById(id).get();
-    }
-
-    public List<Book> searchBookByCategory(String category) {
-        return bookRepo.findByCategory(category);
-    }
-    
-    public String deleteBook(String id) {
-        bookRepo.deleteById(id);
-        return "Book Deleted";
-    }
-
-    public String updateBook(Book book) {
-        return bookRepo.updatePrice(book.getPrice(),book.getId()) > 0  ? "Price updated." : "Price update failed.";
-    }
-
-    public Book addBook(Book book) {
-        return bookRepo.save(book);
-    }
 }
-
-    
