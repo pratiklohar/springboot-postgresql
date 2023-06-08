@@ -1,9 +1,6 @@
 package com.project.springbootpostgresql.dto;
 
-import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -18,14 +15,14 @@ public class BookDTO {
     private String title;
     @NotBlank(message = "Author is mandatory")
     private String author;
-    @NotBlank(message = "Category is mandatory")
+    @Size(min = 5, max = 30, message = "Category must be between 10 and 200 characters")
     private String category;
-
-    @NotNull(message = "Quantity is mandatory")
     @Positive(message = "Quantity must be greater than 0")
     private int quantity;
 
-    @NotNull(message = "Price is mandatory")
-    @Min(value = 1, message = "Price must be greater than 0")
+    @Min(value = 10, message = "Price should not be less than 10.")
+    @Max(value = 150, message = "Price should not be greater than 10000.")
     private float price;
+
+
 }
